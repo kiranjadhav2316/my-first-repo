@@ -1,9 +1,8 @@
 name: var-demo
-on: push
-
-env:
-  MESSAGE: Hello World !
-
+on: 
+- push
+- workflow_dispatch
+ 
 jobs:
   job-1:
     runs-on: ubuntu-24.04
@@ -11,8 +10,9 @@ jobs:
       MESSAGE: Hello India !
     steps:
       - run: echo $MESSAGE
-  
   job-2:
     runs-on: ubuntu-24.04
     steps:
       - run: echo $MESSAGE
+        env:
+          MESSAGE: ${{ vars.MESSAGE }}
